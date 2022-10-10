@@ -1,0 +1,26 @@
+#definicion de la creacion del servicio
+apiVersion: v1
+#tipo de objeto que se va acrear
+kind : Service
+metadata:
+  name: app-service
+  labels:
+    name: app-service
+    app: app
+spec:
+  type: NodePort
+##indicar configc de puertos
+  ports:
+  #el puerto del nodo
+    - port: 80
+    #el target port del service
+      targetPort: 80
+      nodePort: 30008
+      #Enlazandolo con el POD
+  selector: 
+  #los labels quer representan al PDD (linea 8 y 9 del archivo app-pod)
+  #es como si fuera un identificador unico
+    app: app
+    type: mvc
+    
+  

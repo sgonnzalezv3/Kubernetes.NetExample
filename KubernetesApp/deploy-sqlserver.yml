@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-deploy
+  labels:
+    name: mssql-deploy
+    app: app
+spec:
+    replicas: 1
+    selector: 
+      matchLabels:
+        app: app
+        name: mssql-pod
+        #desde aqui se copia toda la info del pod de sql server
+    template:
+      metadata: 
+        name: mssql-pod
+        labels:
+            app: app
+            name: mssql-pod
+      #indicar el nombre del container y tambien cual sera la imagen desde la cual se va a crear este container
+      spec: 
+      #container representa una lista
+        containers: 
+          - name: mssql
+          #nombre de la imagen publica de la imagen
+            image: mcr.microsoft.com/mssql/server
+          #puertos
+            ports:
+              - containerPort: 1433
+              ##acceso mediante user y password
+            env:
+              ## PARA QUE ACEPTE USERS CON USER Y PASSWORD EN SQL
+              - name: ACCEPT_EULA
+                value: "Y"
+              - name: SA_PASSWORD
+                value: "Sgonzalezv3!"                

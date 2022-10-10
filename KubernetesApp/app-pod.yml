@@ -1,0 +1,22 @@
+apiVersion: v1
+#indicar que tipo de objeto crear
+kind: Pod
+# metadata: descripcion del objeto POD
+metadata: 
+  name: app-pod
+  labels:
+      app: app
+      type: mvc
+#indicar el nombre del container y tambien cual sera la imagen desde la cual se va a crear este container
+spec: 
+#container representa una lista
+  containers: 
+    - name: app-mvc
+    #nombre de la imagen publica de la imagen
+      image: sgonzalezv3/mvc-prototipo:v2.0
+    #puertos
+      ports:
+        - containerPort: 80
+      env:      
+        - name: ConnectionStrings__ContextoCurso    
+          value: Data Source = mssql-sevice;Initial Catalog = DockerKubernetes;User = sa ; Password = Sgonzalezv3!;   

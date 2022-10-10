@@ -1,0 +1,25 @@
+#definicion de la creacion del servicio
+apiVersion: v1
+#tipo de objeto que se va acrear
+kind : Service
+metadata:
+  name: mssql-service
+  labels:
+    name: mssql-service
+    app: app
+spec:
+  type: NodePort
+##indicar configc de puertos
+  ports:
+  #el puerto del nodo
+    - port: 1433
+    #el target port del service
+      targetPort: 1433
+      #Enlazandolo con el POD
+  selector: 
+  #los labels quer representan al PDD (linea 8 y 9 del archivo app-pod)
+  #es como si fuera un identificador unico
+    app: app
+    type: mssql-pod
+    
+  

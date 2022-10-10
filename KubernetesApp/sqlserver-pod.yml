@@ -1,0 +1,26 @@
+apiVersion: v1
+#indicar que tipo de objeto crear
+kind: Pod
+# metadata: descripcion del objeto POD
+metadata: 
+  name: mssql-pod
+  labels:
+      app: app
+      name: mssql-pod
+#indicar el nombre del container y tambien cual sera la imagen desde la cual se va a crear este container
+spec: 
+#container representa una lista
+  containers: 
+    - name: mssql
+    #nombre de la imagen publica de la imagen
+      image: mcr.microsoft.com/mssql/server
+    #puertos
+      ports:
+        - containerPort: 1433
+        ##acceso mediante user y password
+      env:
+        ## PARA QUE ACEPTE USERS CON USER Y PASSWORD EN SQL
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          value: "Sgonzalezv3!"          
